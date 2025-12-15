@@ -22,7 +22,9 @@ def register_websocket_routes(app, game):
 
               # On ne calcule pas cette partie du code dans les tests de couverture. Les fonctions sont testées
               # dans les tests des classes Game et WebsocketHelper.
+
               # pragma: no cover start
+
               # Vérifie si l'autre joueur est toujours connecté
               if await wsh.check_disconnect(ws, player_symbol):
                   continue

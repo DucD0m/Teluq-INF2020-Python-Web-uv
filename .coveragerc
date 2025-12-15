@@ -2,3 +2,8 @@
 source = classes,routes
 #omit =
 #    */websocket_routes.py
+
+[report]
+# Exclude single-line and block pragmas
+exclude_lines =
+    pragma: no cover
