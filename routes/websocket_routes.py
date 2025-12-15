@@ -10,12 +10,12 @@ def register_websocket_routes(app, game):
 
       wsh = WebsocketHelper(game)
 
-      player_symbol = game.assign_symbol(ws)
+      player_symbol = game.assign_symbol(ws) # pragma: no cover
 
       user_id = request.cookies.get("id")
       ws.user_id = int(user_id) if user_id else None
 
-      await ws.send("YOU|" + player_symbol) # pragma: no cover
+      await ws.send("YOU|" + player_symbol)
       await wsh.broadcast(game.board_state()) # pragma: no cover
 
 
