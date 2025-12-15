@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <title>Tic Tac Toe - Leaderboard</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/leaderboard.css">
+        <link rel="stylesheet" href="css/modal.css">
+        <script src="js/global.js" defer></script>
+    </head>
+
+
+    <body>
+
+        <h1 class="green">Tableau des meneurs</h1>
+
+        {% if game_result %}
+          <div id="msgModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p class="pink">
+                {{ game_result }}
+              </p>
+            </div>
+          </div>
+        {% endif %}
+
+        <table class="board">
+            <tr>
+                <th>Rang</th>
+                <th>Joueur</th>
+                <th>Victoires</th>
+            </tr>
+
+            {% for leader in leaders %}
+              <tr>
+                  <td>{{ loop.index }}</td>
+                  <td>{{ leader.username }}</td>
+                  <td>{{ leader.wins }}</td>
+              </tr>
+            {% endfor %}
+
+            {# Fill remaining rows until 10 #}
+            {% for i in range(leaders|length, 10) %}
+              <tr>
+                  <td>{{ i + 1 }}</td>
+                  <td>&nbsp;</td>
+                  <td>&nbsp;</td>
+              </tr>
+            {% endfor %}
+        </table>
+
+        <a href="/" class="link mt-0 yellow">Débutez une nouvelle partie!</a>
+
+    </body>
+</html>

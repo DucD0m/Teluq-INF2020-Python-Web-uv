@@ -1,0 +1,35 @@
+input:after {
+  color: hotpink;
+}
+
+button {
+  background: transparent;
+  border: solid lightgreen 3px;
+  border-radius: 8px;
+  padding: 2%;
+  font-family: 'EraserRegular';
+  color: lightgreen;
+  font-size: 1em;
+  cursor: pointer;
+}
+
+button:hover {
+  background: lightgreen;
+  color: #31343a;
+}
+
+label {
+  font-size: 0.8em;
+}
+
+.input {
+  max-width: 95%;
+  background-color: transparent;
+  font-size: 1em;
+  height: 1em;
+  border: none;
+  border-bottom: solid white 2px;
+  cursor: pointer;
+  font-family: 'EraserRegular';
+  outline: none;
+}

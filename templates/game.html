@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Tic Tac Toe</title>
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/game.css">
+        <script src="js/game.js" defer></script>
+    </head>
+
+    <body>
+
+        <h1 class="green">Tic Tac Toe</h1>
+
+        <div class="board">
+          <table id="board" class="board-table">
+            <tbody>
+              <tr>
+                  <td class="cell b-border r-border" data-index="0"></td>
+                  <td class="cell b-border r-border" data-index="1"></td>
+                  <td class="cell b-border" data-index="2"></td>
+              </tr>
+              <tr>
+                  <td class="cell b-border r-border" data-index="3"></td>
+                  <td class="cell b-border r-border" data-index="4"></td>
+                  <td class="cell b-border" data-index="5"></td>
+              </tr>
+              <tr>
+                  <td class="cell r-border" data-index="6"></td>
+                  <td class="cell r-border" data-index="7"></td>
+                  <td class="cell" data-index="8"></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div id="user">{{username}} <span id="user-msg">Connection en cours...</span></div>
+        <div id="turn"></div>
+
+        <a href="/logout" id="logout-icon">
+          <img src="img/logout.svg" alt="Logout" width="30" height="30">
+          <span class="tooltip-text">Déconnexion</span>
+        </a>
+
+        <form id="result_form" action="/leaderboard" method="post" hidden>
+          <input id="result_value" type="text" name="result_value">
+        </form>
+
+    </body>
+
+</html>

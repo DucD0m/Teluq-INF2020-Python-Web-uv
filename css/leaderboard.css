@@ -1,0 +1,34 @@
+table {
+    margin: 40px auto !important;
+    font-size: 1em !important;
+    padding: 6px !important;
+}
+
+th, td {
+    padding: 9px;
+    text-align: center;
+}
+
+th {
+    color: yellow;
+    font-size: 2em;
+}
+
+tr:nth-child(even) {
+    color: aqua;
+}
+
+tr:nth-child(odd) {
+    color: hotpink;
+}
+
+.modal-content {
+  background:aqua !important;
+  rotate: -30deg;
+}
+
+.modal-content p {
+  font-weight: bold;
+  font-size:50px;
+  margin:15px 0px;
+}

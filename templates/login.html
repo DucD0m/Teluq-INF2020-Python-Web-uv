@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+    <head>
+        <meta charset="utf-8">
+        <title>Tic Tac Toe - Authentification</title>
+        <link rel="stylesheet" href="css/global.css">
+        <link rel="stylesheet" href="css/login.css">
+        <link rel="stylesheet" href="css/modal.css">
+        <script src="js/global.js" defer></script>
+        <script src="js/login.js" defer></script>
+    </head>
+
+    <body>
+
+        <h1 class="green">Tic Tac Toe</h1>
+
+        {% if message %}
+          <div id="msgModal" class="modal">
+            <div class="modal-content">
+              <span class="close">&times;</span>
+              <p>{{ message }}</p>
+            </div>
+          </div>
+        {% endif %}
+
+        <div class="mt-med">
+
+            <form action="/{{page}}" method="post" class="board">
+
+                <div class="mt-sm">
+                    <label for="username"><b>Utilisateur &nbsp;&nbsp; : </b></label>
+                    <input id="username" type="text" name="username" class="input blue" minlength="3" required>
+                </div>
+
+                <div class="mt-med">
+                    <label for="password"><b>Mot de passe : </b></label>
+                    <input id="password" type="password"  name="password" class="input pink" minlength="3" required>
+                </div>
+
+                {% if page == 'register' %}
+                    <div class="mt-med">
+                        <label for="password2"><b>Confirmation du mot de passe : </b></label>
+                        <input id="password2" type="password"  name="password2" class="input pink" minlength="3" required>
+                    </div>
+                {% endif %}
+
+                <div class="mt-med">
+                  {% if page == "login" %}
+                     <button type="submit">Connexion</button>
+                  {% elif page == "register" %}
+                     <button type="submit">Enregistrement</button>
+                  {% endif %}
+                </div>
+
+             </form>
+
+             {% if page == "login" %}
+                <a href="/register" class="link mt-big yellow">Vous n'avez pas de compte? Enregistrez-vous!</a>
+             {% elif page == "register" %}
+                <a href="/login" class="link yellow">Vous avez déjà un compte? Connectez-vous!</a>
+             {% endif %}
+
+         </div>
+
+    </body>
+
+</html>
