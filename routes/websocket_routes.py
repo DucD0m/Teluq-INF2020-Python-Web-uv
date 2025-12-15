@@ -66,7 +66,7 @@ def register_websocket_routes(app, game):
               # Changement du premier joueur à jouer pour la prochaine partie.
               game.current_player = "O" if game.current_player == "X" else "X"
               await wsh.broadcast(game.board_state())
-              # pragma: no cover end
+              # pragma: no cover stop
 
       finally:
           # Nettoyage des connections.
