@@ -20,6 +20,9 @@ def register_websocket_routes(app, game):
           while True:
               move = await ws.recv()
 
+              # On ne calcule pas cette partie du code dans les tests de couverture. Les fonctions sont testées
+              # dans les tests des classes Game et WebsocketHelper.
+              # pragma: no cover start
               # Vérifie si l'autre joueur est toujours connecté
               if await wsh.check_disconnect(ws, player_symbol):
                   continue
@@ -61,7 +64,7 @@ def register_websocket_routes(app, game):
               # Changement du premier joueur à jouer pour la prochaine partie.
               game.current_player = "O" if game.current_player == "X" else "X"
               await wsh.broadcast(game.board_state())
-
+              # pragma: no cover end
 
       finally:
           # Nettoyage des connections.

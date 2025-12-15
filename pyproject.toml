@@ -6,10 +6,12 @@ readme = "README.md"
 requires-python = ">=3.9"
 dependencies = [
     "asyncio>=4.0.0",
+    "colorama>=0.4.6",
     "coverage>=7.10.7",
     "coverage-badge>=1.1.2",
     "jinja2>=3.1.6",
     "sanic>=25.3.0",
     "sanic-ext>=24.12.0",
     "sanic-testing>=24.6.0",
+    "unittest-xml-reporting>=3.2.0",
 ]

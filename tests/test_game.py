@@ -3,21 +3,15 @@ from unittest.mock import patch, MagicMock
 from classes.Game import Game
 
 ## Dépendances
-## pip install --user coverage unittest-xml-reporting colorama
-## pip install --user coverage-badge
-## pip install --user pytest pytest-cov
+## uv add coverage unittest-xml-reporting colorama
+## uv add coverage-badge
 
 ## Utilisation
-## python -m unittest discover -s tests (Raport simple)
-## coverage run --rcfile=.coveragerc -m unittest discover -s tests (Test avec rapport de couverture)
-## coverage report -m (Afficher rapport de couverture)
-## coverage html (Rapport en version page web, htmlcov/index.html pour visualiser)
-## coverage xml (Rapport sous format XML, utilisé par GitHub Actions.)
-## coverage-badge -o coverage.svg (Pour badge de couverture dans GitHub)
-
-
-## python -m pytest --cov=classes --cov-report=term-missing (pour utiliser visualisation avec pytest)
-
+## uv run coverage run --rcfile=.coveragerc -m unittest discover -s tests (Test avec rapport de couverture)
+## uv coverage report -m (Afficher rapport de couverture avec les numéros de ligne qui ne sont pas couvertes)
+## uv coverage html (Rapport en version page web, htmlcov/index.html pour visualiser)
+## uv coverage xml (Rapport sous format XML, utilisé par GitHub Actions.)
+## uv coverage-badge -o coverage.svg -f (Pour badge de couverture dans GitHub)
 
 
 class FakeWS:
