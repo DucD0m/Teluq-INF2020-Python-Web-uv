@@ -1,4 +1,4 @@
-![Tests](https://github.com/DucD0m/Teluq-INF2020-Python-Web/actions/workflows/tests.yml/badge.svg)
+![Tests](https://github.com/DucD0m/Teluq-INF2020-Python-Web/actions/workflows/tests.yml/badge.svg?branch=main)
 ![Coverage](coverage.svg)
 
 3e Travail du cours INF2020. Il s'agit d'un jeu de Tic Tac Toe sous la forme d'une application web asynchrone en Python en utilisant le framework Sanic ainsi que des websockets. Cette version utilise le package uv pour la gestion des dépendances.
