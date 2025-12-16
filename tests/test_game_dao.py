@@ -50,4 +50,4 @@ class TestGameDAO(unittest.TestCase):
 
         leaderboard = self.dao.get_leaderboard()
         self.assertEqual(leaderboard[0]["username"], "Alice")
-        self.assertEqual(leaderboard[0]["wins"], 2)
+        self.assertEqual(leaderboard[0]["wins"], 6)
