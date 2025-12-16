@@ -1,4 +1,4 @@
-let socket = new WebSocket("ws://" + window.location.host + "/ws");
+let socket = new WebSocket("wss://" + window.location.host + "/ws");
 
 let mySymbol = null;
 let currentTurn = null;
@@ -49,7 +49,7 @@ socket.addEventListener("message", (event) => {
     if (msg.startsWith("DISC|")) {
         disconnect = msg.split("|")[1];
         alert(disconnect);
-        window.location.href = "http://" + window.location.host + "/";
+        window.location.href = "https://" + window.location.host + "/";
         return;
     }
 
