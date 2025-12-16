@@ -6,16 +6,12 @@ from classes.UserDAO import UserDAO
 class TestUserDAO(unittest.TestCase):
     def setUp(self):
         # Crée un fichier temporaire pour la base de données
-        self.db_file = tempfile.NamedTemporaryFile(delete=False)
+        self.db_file = tempfile.NamedTemporaryFile(delete=True)
         self.db_path = self.db_file.name
         self.db_file.close()
 
         # Instancie UserDAO, qui crée la table users
         self.dao = UserDAO(self.db_path)
-
-    def tearDown(self):
-        # Supprime le fichier temporaire après les tests
-        os.unlink(self.db_path)
 
     def test_insert_user_success(self):
         """Insertion réussie retourne un id entier"""

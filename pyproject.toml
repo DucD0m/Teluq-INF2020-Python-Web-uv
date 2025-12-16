@@ -1,9 +1,9 @@
 [project]
 name = "tic-tac-toe"
-version = "0.1.0"
-description = "Add your description here"
+version = "2.0.1"
+description = "Jeu de Tic Tac Toe utilisant Sanic et websockets"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = "==3.12.4"
 dependencies = [
     "asyncio>=4.0.0",
     "colorama>=0.4.6",

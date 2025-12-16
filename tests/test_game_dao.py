@@ -6,33 +6,28 @@ from classes.GameDAO import GameDAO
 
 class TestGameDAO(unittest.TestCase):
     def setUp(self):
-        # Fichier temporaire pour la base
-        self.db_file = tempfile.NamedTemporaryFile(delete=False)
+        # Temporary file for DB
+        self.db_file = tempfile.NamedTemporaryFile(delete=True)
         self.db_path = self.db_file.name
-        self.db_file.close()  # On ferme le fichier, SQLite l’ouvrira
+        self.db_file.close()
 
-        # Crée la table users
-        conn = sqlite3.connect(self.db_path)
-        conn.row_factory = sqlite3.Row
-        cur = conn.cursor()
-        cur.execute("""
-            CREATE TABLE users (
-                id INTEGER PRIMARY KEY AUTOINCREMENT,
-                username TEXT UNIQUE NOT NULL
+        # Use context manager to create the table and insert users
+        with sqlite3.connect(self.db_path) as conn:
+            conn.row_factory = sqlite3.Row
+            cur = conn.cursor()
+            cur.execute("""
+                CREATE TABLE users (
+                    id INTEGER PRIMARY KEY AUTOINCREMENT,
+                    username TEXT UNIQUE NOT NULL
+                )
+            """)
+            cur.executemany(
+                "INSERT INTO users (username) VALUES (?)",
+                [("Alice",), ("Bob",), ("Charlie",)]
             )
-        """)
-        cur.executemany(
-            "INSERT INTO users (username) VALUES (?)",
-            [("Alice",), ("Bob",), ("Charlie",)]
-        )
-        conn.commit()
-        conn.close()
+            conn.commit()
 
-        # Instancie GameDAO, qui créera la table games
         self.dao = GameDAO(self.db_path)
-
-    def tearDown(self):
-        os.unlink(self.db_path)  # supprime le fichier temporaire
 
     def test_insert_game(self):
         game_id = self.dao.insert_game(1, 2, 1)
