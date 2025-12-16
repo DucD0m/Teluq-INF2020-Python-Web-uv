@@ -1,15 +1,15 @@
 [
     {
         "username": "ele9",
-        "wins": 20
+        "wins": 21
+    },
+    {
+        "username": "dom2",
+        "wins": 9
     },
     {
         "username": "phil",
         "wins": 9
-    },
-    {
-        "username": "dom2",
-        "wins": 5
     },
     {
         "username": "dom",
@@ -18,6 +18,10 @@
     {
         "username": "ele7",
         "wins": 2
+    },
+    {
+        "username": "dom3",
+        "wins": 1
     },
     {
         "username": "ele12",

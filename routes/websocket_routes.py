@@ -68,7 +68,5 @@ def register_websocket_routes(app, game):
 
       finally:
           # Nettoyage des connections.
-          try:
-              game.connected.pop(ws, None)
-          except ValueError:
-              pass
+          game.connected.pop(ws, None)
+          
