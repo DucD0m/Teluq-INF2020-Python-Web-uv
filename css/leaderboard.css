@@ -32,3 +32,9 @@ tr:nth-child(odd) {
   font-size:50px;
   margin:15px 0px;
 }
+
+#message {
+  font-size: 2em;
+  margin-top: 12%;
+  margin-bottom: 12%;
+}

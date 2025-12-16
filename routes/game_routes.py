@@ -16,18 +16,27 @@ def register_game_routes(app, login_page):
 
   @app.route('/leaderboard', methods=["GET", "POST"])
   async def leaderboard(request):
-      dao = GameDAO("tictactoe.db")
-      leaders = dao.get_leaderboard()
-
-      leaderboard_data = [
-          {"username": row["username"], "wins": row["wins"]}
-          for row in leaders
-      ]
-
       game_result = None
+      message = None
+
+      dao = GameDAO("tictactoe.db")
+
+      # leaders = dao.get_leaderboard()
+      # leaderboard_data = [
+      #     {"username": row["username"], "wins": row["wins"]}
+      #     for row in leaders
+      # ]
+
+      dao.set_leaderbord_file() # Mise à jour du tableau des meneurs.
+      leaderboard_data = dao.get_leaderboard_file()
+
+      if type(leaderboard_data) is str:
+          message = leaderboard_data
+          leaderboard_data = None
+
       if request.method == "POST":
           game_result = request.form.get("result_value")
 
       return await render(
-          "leaderboard.html", context={"leaders": leaderboard_data, "game_result": game_result}
+          "leaderboard.html", context={"leaders": leaderboard_data, "game_result": game_result, "message": message}
       )

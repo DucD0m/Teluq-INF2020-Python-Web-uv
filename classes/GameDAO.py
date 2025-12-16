@@ -1,9 +1,11 @@
 import sqlite3
+import json
 
 class GameDAO:
-    
-    def __init__(self, db_path):
+
+    def __init__(self, db_path, file_path = "leaderboard.json"):
         self.db_path = db_path
+        self.file_path = file_path
         self._ensure_schema()
 
     def _ensure_schema(self):
@@ -45,3 +47,19 @@ class GameDAO:
                 LIMIT 10;
             """)
             return cur.fetchall()
+
+    def set_leaderbord_file(self):
+        leaderboard = self.get_leaderboard()
+        data = [dict(row) for row in leaderboard]
+
+        with open(self.file_path, "w", encoding="utf-8") as f:
+            json.dump(data, f, indent=4, ensure_ascii=False)
+
+    def get_leaderboard_file(self):
+        message = "Le tableau des meneurs n'est pas disponible en ce moment."
+        try:
+            with open(self.file_path, 'r', encoding='utf-8') as f:
+                data = json.load(f)
+                return data
+        except:
+            return message

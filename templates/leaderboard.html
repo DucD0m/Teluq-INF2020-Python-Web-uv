@@ -26,30 +26,36 @@
           </div>
         {% endif %}
 
-        <table class="board">
-            <tr>
-                <th>Rang</th>
-                <th>Joueur</th>
-                <th>Victoires</th>
-            </tr>
+        {% if message %}
+          <p id="message" class="pink board">{{ message}}</p>
+        {% endif %}
 
-            {% for leader in leaders %}
+        {% if leaders %}
+          <table class="board">
               <tr>
-                  <td>{{ loop.index }}</td>
-                  <td>{{ leader.username }}</td>
-                  <td>{{ leader.wins }}</td>
+                  <th>Rang</th>
+                  <th>Joueur</th>
+                  <th>Victoires</th>
               </tr>
-            {% endfor %}
 
-            {# Fill remaining rows until 10 #}
-            {% for i in range(leaders|length, 10) %}
-              <tr>
-                  <td>{{ i + 1 }}</td>
-                  <td>&nbsp;</td>
-                  <td>&nbsp;</td>
-              </tr>
-            {% endfor %}
-        </table>
+              {% for leader in leaders %}
+                <tr>
+                    <td>{{ loop.index }}</td>
+                    <td>{{ leader.username }}</td>
+                    <td>{{ leader.wins }}</td>
+                </tr>
+              {% endfor %}
+
+              {# Fill remaining rows until 10 #}
+              {% for i in range(leaders|length, 10) %}
+                <tr>
+                    <td>{{ i + 1 }}</td>
+                    <td>&nbsp;</td>
+                    <td>&nbsp;</td>
+                </tr>
+              {% endfor %}
+          </table>
+        {% endif %}
 
         <a href="/" class="link mt-0 yellow">Débutez une nouvelle partie!</a>
 
