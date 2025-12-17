@@ -1,13 +1,10 @@
 .modal {
   display: block;
   position: fixed;
-  z-index: 9999;
-  padding-top: 40vh;
+  z-index: 2;
   left: 0;
-  top: 0;
+  top: 40vh;
   width: 100%;
-  height: 100%;
-  overflow: auto;
 }
 
 .modal-content {
@@ -24,14 +21,14 @@
 
 .close {
   position: absolute;
-  right: 12px;
-  top: 0px;
+  right: 7px;
+  top: 5px;
   font-size: 24px;
   font-weight: bold;
   cursor: pointer;
-  color: #555;
+  color: #000;
 }
 
 .close:hover {
-  color: #000;
+  color: #555;
 }

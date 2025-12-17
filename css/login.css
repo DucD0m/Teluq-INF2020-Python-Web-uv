@@ -1,13 +1,9 @@
-input:after {
-  color: hotpink;
-}
-
 button {
   background: transparent;
   border: solid lightgreen 3px;
   border-radius: 8px;
   padding: 2%;
-  font-family: 'EraserRegular';
+  font-family: inherit;
   color: lightgreen;
   font-size: 1em;
   cursor: pointer;
@@ -30,6 +26,6 @@ label {
   border: none;
   border-bottom: solid white 2px;
   cursor: pointer;
-  font-family: 'EraserRegular';
+  font-family: inherit;
   outline: none;
 }

@@ -21,23 +21,15 @@
   border-right: groove hotpink 10px;
 }
 
-#user {
-  color: yellow;
+.info {
   font-weight: bold;
-  font-size:36px;
+  font-size: 36px;
+}
+
+#user {
   margin-top:35px;
 }
 
-#status {
-    margin-top: 20px;
-    font-size: 24px;
-    text-align: center;
-    height: 30px;
-}
-
 #turn {
-  color: aqua;
-  font-weight: bold;
-  font-size:36px;
   margin-top: 15px;
 }

@@ -29,7 +29,7 @@
 
                 <div class="mt-sm">
                     <label for="username"><b>Utilisateur &nbsp;&nbsp; : </b></label>
-                    <input id="username" type="text" name="username" class="input blue" minlength="3" required>
+                    <input id="username" type="text" name="username" class="input blue" minlength="3" autocomplete="on" required>
                 </div>
 
                 <div class="mt-med">
@@ -57,7 +57,7 @@
           {% if page == "login" %}
             <a href="/register" class="link mt-big yellow">Vous n'avez pas de compte? Enregistrez-vous!</a>
           {% elif page == "register" %}
-            <a href="/login" class="link yellow">Vous avez un compte? Connectez-vous!</a>
+            <a href="/login" class="link mt-sm yellow">Vous avez un compte? Connectez-vous!</a>
           {% endif %}
 
     </body>

@@ -32,7 +32,6 @@ h1 {
 
 .link {
   display: inline-block;
-  margin-top: 25px;
   font-size: 1.5em;
 }
 
@@ -79,12 +78,11 @@ h1 {
   width: 90px;
   background-color: #31343a;
   font-size: 0.7em;
-  color: aqua;
   text-align: center;
   padding: 5px 0;
   border-radius: 6px;
   position: absolute;
-  top: 5vh;
+  top: 6vh;
   right: 0vw;
   z-index: 1;
 }
