@@ -1,4 +1,6 @@
-// Selection de tous les champs dans les formulaires.
+/**
+ * Selection de tous les champs dans le formulaire et modification du message d'avertissement.
+ */
 document.querySelectorAll("form input[type=text], form input[type=password]").forEach(function(input) {
 
      ["change", "invalid"].forEach(function(eventName) {

@@ -1,8 +1,12 @@
 let socket = new WebSocket("wss://" + window.location.host + "/ws");
-
 let mySymbol = null;
 let currentTurn = null;
 
+/**
+ * Mise à jour des informations sur le déroulement de la partie.
+ *
+ * @param {string} boardStr - Une chaîne de caractères représentant l'état du plateau de jeu.
+ */
 function updateStatus(boardStr) {
     if (!mySymbol) return;
 
@@ -21,8 +25,12 @@ function updateStatus(boardStr) {
     document.getElementById("user-msg").innerHTML = "Vous jouez: " + mySymbol;
 }
 
+/**
+ * Mise à jour du tableau de jeu.
+ *
+ * @param {string} msg - Le message event.data recu par le websocket.
+ */
 function board_update(msg) {
-  // Normal board update
   let [boardStr, current] = msg.split("|");
   currentTurn = current;
   updateStatus(boardStr);
@@ -35,6 +43,12 @@ function board_update(msg) {
   });
 }
 
+/**
+ * Gestion des messages reçus par le websocket et
+ * soumission du formulaire pour accéder à la route /leaderboard.
+ *
+ * @param {MessageEvent} event - Le message recu par le websocket.
+ */
 socket.addEventListener("message", (event) => {
     let msg = event.data;
 
@@ -63,18 +77,15 @@ socket.addEventListener("message", (event) => {
           } else {
               document.getElementById("result_value").value = "You avez perdu… 💀";
           }
-
         }
         else {
           document.getElementById("result_value").value = "Le joueur " + winner + " remporte la partie! 🎉";
         }
 
         document.getElementById("result_form").submit();
-
         return;
     }
 
-    // Partie nulle.
     else if (msg === "DRAW") {
         document.getElementById("result_value").value = "😐 Partie nulle!";
         document.getElementById("result_form").submit();
@@ -84,9 +95,14 @@ socket.addEventListener("message", (event) => {
     board_update(msg);
 });
 
-document.getElementById("board").addEventListener("click", function (e) {
-    if (e.target.classList.contains("cell")) {
-        const index = parseInt(e.target.dataset.index);
+/**
+ * Envoi du coup joué au serveur par le websocket.
+ *
+ * @param {PointerEvent} event - Événement représentant l'intercation de l'utilisateur.
+ */
+document.getElementById("board").addEventListener("click", function (event) {
+    if (event.target.classList.contains("cell")) {
+        const index = parseInt(event.target.dataset.index);
         if (!mySymbol) return;
         socket.send(index.toString());
     }
