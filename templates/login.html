@@ -16,17 +16,16 @@
         <h1 class="green">Tic Tac Toe</h1>
 
         {% if message %}
-          <div id="msgModal" class="modal">
+          <div id="modal" class="modal">
             <div class="modal-content">
-              <span class="close">&times;</span>
+              <span class="close">X</span>
               <p>{{ message }}</p>
             </div>
           </div>
         {% endif %}
 
-        <div class="mt-med">
 
-            <form action="/{{page}}" method="post" class="board">
+        <form action="/{{page}}" method="post" class="board">
 
                 <div class="mt-sm">
                     <label for="username"><b>Utilisateur &nbsp;&nbsp; : </b></label>
@@ -53,15 +52,13 @@
                   {% endif %}
                 </div>
 
-             </form>
+          </form>
 
-             {% if page == "login" %}
-                <a href="/register" class="link mt-big yellow">Vous n'avez pas de compte? Enregistrez-vous!</a>
-             {% elif page == "register" %}
-                <a href="/login" class="link yellow">Vous avez déjà un compte? Connectez-vous!</a>
-             {% endif %}
-
-         </div>
+          {% if page == "login" %}
+            <a href="/register" class="link mt-big yellow">Vous n'avez pas de compte? Enregistrez-vous!</a>
+          {% elif page == "register" %}
+            <a href="/login" class="link yellow">Vous avez un compte? Connectez-vous!</a>
+          {% endif %}
 
     </body>
 

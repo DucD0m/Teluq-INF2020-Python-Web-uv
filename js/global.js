@@ -1,4 +1,4 @@
-const modal = document.getElementById("msgModal");
+const modal = document.getElementById("modal");
 const closeBtn = document.querySelector(".close");
 
 if (closeBtn && modal) {

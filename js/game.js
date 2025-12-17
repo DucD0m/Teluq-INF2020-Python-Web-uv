@@ -59,14 +59,14 @@ socket.addEventListener("message", (event) => {
 
         if(mySymbol === "X" || mySymbol === "O") {
           if (winner === mySymbol) {
-              document.getElementById("result_value").value = "🎉 You avez GAGNÉ!";
+              document.getElementById("result_value").value = "🎉 Victoire!";
           } else {
               document.getElementById("result_value").value = "You avez perdu… 💀";
           }
 
         }
         else {
-          document.getElementById("result_value").value = "Le joueur " + winner + " à GAGNÉ! 🎉";
+          document.getElementById("result_value").value = "Le joueur " + winner + " remporte la partie! 🎉";
         }
 
         document.getElementById("result_form").submit();
