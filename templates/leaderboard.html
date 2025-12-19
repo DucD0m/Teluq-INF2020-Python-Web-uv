@@ -35,14 +35,14 @@
               <tr>
                   <th>Rang</th>
                   <th>Joueur</th>
-                  <th>Victoires</th>
+                  <th>Points</th>
               </tr>
 
               {% for leader in leaders %}
                 <tr>
-                    <td>{{ loop.index }}</td>
-                    <td>{{ leader.username }}</td>
-                    <td>{{ leader.wins }}</td>
+                  <td>{{ loop.index }}</td>
+                  <td>{{ leader.username }}</td>
+                  <td>{{ leader.points }}</td>
                 </tr>
               {% endfor %}
 

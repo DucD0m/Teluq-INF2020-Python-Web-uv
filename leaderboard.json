@@ -1,42 +1,42 @@
 [
     {
         "username": "ele9",
-        "wins": 27
+        "points": 2800
     },
     {
         "username": "dom2",
-        "wins": 9
+        "points": 1200
     },
     {
         "username": "phil",
-        "wins": 9
-    },
-    {
-        "username": "dom",
-        "wins": 3
+        "points": 950
     },
     {
         "username": "Eleo",
-        "wins": 2
+        "points": 550
     },
     {
         "username": "dominique",
-        "wins": 2
+        "points": 550
+    },
+    {
+        "username": "dom",
+        "points": 350
     },
     {
         "username": "ele7",
-        "wins": 2
+        "points": 200
     },
     {
         "username": "Dominique",
-        "wins": 1
+        "points": 100
     },
     {
         "username": "dom3",
-        "wins": 1
+        "points": 100
     },
     {
         "username": "ele12",
-        "wins": 1
+        "points": 100
     }
 ]
