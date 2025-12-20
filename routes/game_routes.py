@@ -1,5 +1,6 @@
 from sanic_ext import render # Pour les templates jinja2 - pip install jinja2 sanic-ext
-from classes.GameDAO import GameDAO
+# from classes.GameDAO import GameDAO
+from classes.LeaderboardHelper import LeaderboardHelper
 
 def register_game_routes(app, login_page):
 
@@ -19,7 +20,8 @@ def register_game_routes(app, login_page):
       game_result = None
       message = None
 
-      dao = GameDAO("tictactoe.db")
+      #dao = GameDAO("tictactoe.db")
+      lbh = LeaderboardHelper()
 
       # leaders = dao.get_leaderboard()
       # leaderboard_data = [
@@ -27,8 +29,8 @@ def register_game_routes(app, login_page):
       #     for row in leaders
       # ]
 
-      dao.set_leaderbord_file() # Mise à jour du tableau des meneurs.
-      leaderboard_data = dao.get_leaderboard_file()
+      lbh.set_leaderbord_file() # Mise à jour du tableau des meneurs.
+      leaderboard_data = lbh.get_leaderboard_file()
 
       if type(leaderboard_data) is str:
           message = leaderboard_data

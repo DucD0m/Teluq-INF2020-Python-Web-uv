@@ -3,6 +3,7 @@ import unittest
 import tempfile
 import os
 from classes.GameDAO import GameDAO
+from classes.LeaderboardHelper import LeaderboardHelper
 
 class TestGameDAO(unittest.TestCase):
     def setUp(self):
@@ -10,6 +11,11 @@ class TestGameDAO(unittest.TestCase):
         self.db_file = tempfile.NamedTemporaryFile(delete=True)
         self.db_path = self.db_file.name
         self.db_file.close()
+
+        # Temporary file for Leaderboard
+        self.lb_file = tempfile.NamedTemporaryFile(delete=True)
+        self.lb_path = self.lb_file.name
+        self.lb_file.close()
 
         # Use context manager to create the table and insert users
         with sqlite3.connect(self.db_path) as conn:
@@ -28,21 +34,23 @@ class TestGameDAO(unittest.TestCase):
             conn.commit()
 
         self.dao = GameDAO(self.db_path)
+        self.lbh = LeaderboardHelper(self.lb_path)
 
     def test_insert_game(self):
         game_id = self.dao.insert_game(1, 2, 1)
         self.assertIsInstance(game_id, int)
 
     def test_get_leaderboard_empty(self):
-        leaderboard = self.dao.get_leaderboard()
-        self.assertIsInstance(leaderboard, list)
-        self.assertEqual(len(leaderboard), 0)
+        leaderboard = self.lbh.get_leaderboard_file()
+        self.assertIsInstance(leaderboard, str)
+        # self.assertEqual(len(leaderboard), 0)
 
     def test_get_leaderboard_with_games(self):
         self.dao.insert_game(1, 2, 1)
-        self.dao.insert_game(2, 3, 2)
-        self.dao.insert_game(1, 3, 1)
+        self.dao.insert_game(1, 2, 0)
+        self.dao.insert_game(1, 3, 3)
 
-        leaderboard = self.dao.get_leaderboard()
+        self.lbh.set_leaderbord_file(self.dao)
+        leaderboard = self.lbh.get_leaderboard_file()
         self.assertEqual(leaderboard[0]["username"], "Alice")
-        self.assertEqual(leaderboard[0]["wins"], 2)
+        self.assertEqual(leaderboard[0]["points"], 150)

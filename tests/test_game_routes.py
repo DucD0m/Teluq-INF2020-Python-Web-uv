@@ -40,8 +40,8 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
     async def test_leaderboard_get(self):
         leaderboard_data = [{"username": "Alice", "points": 300}]
 
-        with patch.object(game_routes.GameDAO, "set_leaderbord_file", return_value=None), \
-             patch.object(game_routes.GameDAO, "get_leaderboard_file", return_value=leaderboard_data), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+             patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
             mock_render.return_value = text("leaderboard page")
@@ -63,8 +63,8 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
         leaderboard_data = [{"username": "Alice", "points": 3}]
         data = {"result_value": "🎉 You WIN!"}
 
-        with patch.object(game_routes.GameDAO, "set_leaderbord_file", return_value=None), \
-             patch.object(game_routes.GameDAO, "get_leaderboard_file", return_value=leaderboard_data), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+             patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
             mock_render.return_value = text("leaderboard post page")
@@ -85,8 +85,8 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
     async def test_leaderboard_post_without_result(self):
         leaderboard_data = [{"username": "Alice", "points": 300}]
 
-        with patch.object(game_routes.GameDAO, "set_leaderbord_file", return_value=None), \
-             patch.object(game_routes.GameDAO, "get_leaderboard_file", return_value=leaderboard_data), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+             patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
             mock_render.return_value = text("leaderboard post page")
@@ -110,8 +110,8 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
             {"username": "Bob", "points": 100},
         ]
 
-        with patch.object(game_routes.GameDAO, "set_leaderbord_file", return_value=None), \
-             patch.object(game_routes.GameDAO, "get_leaderboard_file", return_value=leaderboard_data), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+             patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
             mock_render.return_value = text("leaderboard page")
@@ -119,7 +119,7 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
             request, response = await self.app.asgi_client.get("/leaderboard")
 
             # Ensure the DAO method was called
-            game_routes.GameDAO.get_leaderboard_file.assert_called_once()
+            game_routes.LeaderboardHelper.get_leaderboard_file.assert_called_once()
 
             mock_render.assert_called_with(
                 "leaderboard.html",
@@ -133,7 +133,7 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
             self.assertEqual(response.text, "leaderboard page")
 
     @patch("routes.game_routes.render")
-    @patch("routes.game_routes.GameDAO.get_leaderboard_file")
+    @patch("routes.game_routes.LeaderboardHelper.get_leaderboard_file")
     async def test_leaderboard_file_missing(self, mock_get_file, mock_render):
         message = "Le tableau des meneurs n'est pas disponible en ce moment."
 
@@ -157,8 +157,8 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
         leaderboard_data = [{"username": "Alice", "points": 500}]
         data = {"result_value": "🎉 Victoire !"}
 
-        with patch.object(game_routes.GameDAO, "set_leaderbord_file", return_value=None), \
-             patch.object(game_routes.GameDAO, "get_leaderboard_file", return_value=leaderboard_data), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+             patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
             mock_render.return_value = text("leaderboard post page")
