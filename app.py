@@ -23,5 +23,5 @@ register_websocket_routes(app, game)
 if __name__ == '__main__':
     #app.run(host="0.0.0.0", port=8000) #http
 
-    # Besoin d'un certificat ssl et de modiffier game.js wss et https.
-    app.run(host="0.0.0.0", port=8443, ssl=ssl) #https
+    # Besoin d'un certificat ssl et de modifier game.js wss et https.
+    app.run(host="10.0.1.13", port=8443, ssl=ssl) #https

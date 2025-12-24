@@ -7,9 +7,10 @@ class GameDAO:
         self._ensure_schema()
 
     def _ensure_schema(self):
+        """Assure que les tables requises par la classe existent avant l'exécution des fonctions."""
         with sqlite3.connect(self.db_path) as conn:
-            cur = conn.cursor()
-            cur.execute("""
+            cursor = conn.cursor()
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS games (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     playerX INTEGER NOT NULL,
@@ -19,7 +20,7 @@ class GameDAO:
                 )
             """)
 
-            cur.execute("""
+            cursor.execute("""
                 CREATE TABLE IF NOT EXISTS users (
                     id INTEGER PRIMARY KEY AUTOINCREMENT,
                     username TEXT UNIQUE NOT NULL,
@@ -30,19 +31,19 @@ class GameDAO:
     def insert_game(self, playerX: int, playerO: int, winner: int):
         """Insère une partie dans la base de données. 0 indique une partie nulle."""
         with sqlite3.connect(self.db_path) as conn:
-            cur = conn.cursor()
-            cur.execute("""
+            cursor = conn.cursor()
+            cursor.execute("""
                 INSERT INTO games (playerX, playerO, winner)
                 VALUES (:x, :o, :w)
             """, {"x": playerX, "o": playerO, "w": winner})
-            return cur.lastrowid
+            return cursor.lastrowid
 
     def get_game_results(self):
         """Retourne la liste des parties par utilisateurs avec leur résultat propre."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row
-            cur = conn.cursor()
-            cur.execute("""
+            conn.row_factory = sqlite3.Row # Permet l'accès aux colonnes par leur nom.
+            cursor = conn.cursor()
+            cursor.execute("""
                 SELECT
                     users.username,
                     CASE
@@ -67,4 +68,4 @@ class GameDAO:
 
                 ORDER BY username
             """)
-            return cur.fetchall()
+            return cursor.fetchall()
