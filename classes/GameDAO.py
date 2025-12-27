@@ -1,13 +1,21 @@
+"""Ce fichier contient une classe pour l'accès à la base de dopnnées."""
 import sqlite3
 
+
 class GameDAO:
+    """Classe pour accéder à la table games."""
 
     def __init__(self, db_path):
+        """Assure que les tables requises par la classe existent avant l'exécution des méthodes.
+
+        Args:
+            db_path (str): Emplacement et nom du fichier sqlite3.
+        """
         self.db_path = db_path
         self._ensure_schema()
 
     def _ensure_schema(self):
-        """Assure que les tables requises par la classe existent avant l'exécution des fonctions."""
+        """Création des tables games et users si absentes."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute("""
@@ -28,20 +36,21 @@ class GameDAO:
                 )
             """)
 
-    def insert_game(self, playerX: int, playerO: int, winner: int):
+    def insert_game(self, player_x: int, player_o: int, winner: int):
         """Insère une partie dans la base de données. 0 indique une partie nulle."""
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 INSERT INTO games (playerX, playerO, winner)
                 VALUES (:x, :o, :w)
-            """, {"x": playerX, "o": playerO, "w": winner})
+            """, {"x": player_x, "o": player_o, "w": winner})
             return cursor.lastrowid
 
     def get_game_results(self):
         """Retourne la liste des parties par utilisateurs avec leur résultat propre."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row # Permet l'accès aux colonnes par leur nom.
+            # Permet l'accès aux colonnes par leur nom.
+            conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT
