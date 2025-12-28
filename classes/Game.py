@@ -1,49 +1,50 @@
 from classes.GameDAO import GameDAO
 
+
 class Game:
 
     def __init__(self):
-        self.connected = {}  # clé: ws, valeur: player_symbol ("X" ou "O")
+        self.connected = {}  # clé: ws, valeur: player ("X" ou "O")
         self.board = [""] * 9
         self.current_player = "X"
 
     def assign_symbol(self, ws):
         if "O" not in self.connected.values():
-            player_symbol = "O"
+            player = "O"
         elif "X" not in self.connected.values():
-            player_symbol = "X"
+            player = "X"
         else:
-            player_symbol = "S"  # spectateur
+            player = "S"  # spectateur
 
-        self.connected[ws] = player_symbol
+        self.connected[ws] = player
 
-        return player_symbol
+        return player
 
-    def validate_move(self, player_symbol, move):
-        """Return valid index or None if invalid."""
+    def validate_move(self, player, move):
+        """Retourne l'index d'une cellule ou None."""
         # Message doit être un entier
         try:
-            idx = int(move)
+            cell = int(move)
         except:
             return None
 
-        # Index valide ?
-        if idx < 0 or idx > 8:
+        # Cellule valide
+        if cell < 0 or cell > 8:
             return None
 
         # Spectateurs ne jouent pas
-        if player_symbol not in ("X", "O"):
+        if player not in ("X", "O"):
             return None
 
-        # Tour du joueur ?
-        if player_symbol != self.current_player:
+        # Tour du joueur
+        if player != self.current_player:
             return None
 
-        # Case déjà prise ?
-        if self.board[idx] != "":
+        # Case déjà prise
+        if self.board[cell] != "":
             return None
 
-        return idx
+        return cell
 
     def check_winner(self, board_state):
         """Retourne 'X' ou 'O' s'il y a un gagnant, ou None."""
@@ -57,34 +58,32 @@ class Game:
                 return board_state[a]
         return None
 
-    def board_full(self, b):
-        return all(cell != "" for cell in b)
+    def board_full(self, board):
+        return all(cell != "" for cell in board)
 
     def reset_game(self):
         self.board = [""] * 9
         self.current_player = "X"
 
-    def insert_game(self,winner_symbol):
+    def insert_game(self, winner):
         dao = GameDAO("tictactoe.db")
-        playerX = None
-        playerO = None
+        player_x = None
+        player_o = None
 
         for client_ws, symbol in self.connected.items():
             if symbol == "X":
-                playerX = client_ws.user_id
+                player_x = client_ws.user_id
             elif symbol == "O":
-                playerO = client_ws.user_id
+                player_o = client_ws.user_id
 
-        if winner_symbol == "X":
-            winner_uid = playerX
-        elif winner_symbol == "O":
-            winner_uid = playerO
+        if winner == "X":
+            winner_id = player_x
+        elif winner == "O":
+            winner_id = player_o
         else:
-            winner_uid = 0 # Partie nulle. Gagnant -> 0.
+            winner_id = 0 # Partie nulle. Gagnant -> 0.
 
-        # winner_uid = playerX if winner_symbol == "X" else playerO
-
-        dao.insert_game(playerX, playerO, winner_uid)
+        dao.insert_game(player_x, player_o, winner_id)
 
     def board_state(self):
         """Retourne un chaîne de caractères représentant le jeu ainsi que le joueur actif."""
