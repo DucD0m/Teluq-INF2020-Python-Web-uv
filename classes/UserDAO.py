@@ -1,14 +1,15 @@
 import sqlite3
 
+
 class UserDAO:
+
     def __init__(self, db_path):
         self.db_path = db_path
         self._ensure_schema()
 
     def _ensure_schema(self):
-        """Assure que la table users existe avant les appels de fonctions."""
+        """Assure que la table users existe avant les appels de méthodes."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row # Permet l'accès aux colonnes par leur nom.
             cursor = conn.cursor()
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS users (
@@ -19,9 +20,8 @@ class UserDAO:
             """)
 
     def insert_user(self, username, password):
-        """ Insertion d'un utilisateur. Retourne le id en cas de réussite, 0 si le nom d'utilisateur existe déjà"""
+        """ Insertion d'un utilisateur. Retourne le id en cas de réussite, 0 si le nom d'utilisateur existe déjà."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
             try:
                 cursor.execute("""
@@ -34,9 +34,9 @@ class UserDAO:
                 return 0
 
     def get_user(self, username, password):
-        """ Récupération d'un utilisateur avec son mot de passe """
+        """Retourne le id et le username ou None."""
         with sqlite3.connect(self.db_path) as conn:
-            conn.row_factory = sqlite3.Row
+            conn.row_factory = sqlite3.Row  # Permet l'accès aux colonnes comme un dictionnaire.
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT id, username
@@ -45,7 +45,4 @@ class UserDAO:
                 AND password = :password
                 LIMIT 1
             """, {"username": username, "password": password})
-            row = cursor.fetchone()
-            if row:
-                return {"id": row["id"], "username": row["username"]}
-            return None
+            return cursor.fetchone()
