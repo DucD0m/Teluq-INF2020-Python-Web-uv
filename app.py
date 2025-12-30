@@ -13,10 +13,9 @@ ssl = {
 }
 
 game = Game()
-login_page = "login.html"
 
-register_game_routes(app, login_page)
-register_login_routes(app, login_page)
+register_game_routes(app)
+register_login_routes(app)
 register_websocket_routes(app, game)
 
 

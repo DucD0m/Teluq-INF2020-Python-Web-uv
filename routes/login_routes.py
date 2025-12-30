@@ -2,8 +2,10 @@ from sanic.response import redirect
 from sanic_ext import render # Pour les templates jinja2 - pip install jinja2 sanic-ext
 from classes.UserDAO import UserDAO
 
-def register_login_routes(app, login_page):
 
+def register_login_routes(app):
+
+    login_page = "login.html"
     UNEXPECTED = "Une erreur inattendue s'est produite. Svp essayez de nouveau."
 
     @app.route('/login')

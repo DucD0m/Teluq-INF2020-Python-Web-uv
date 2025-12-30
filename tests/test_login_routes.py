@@ -14,7 +14,7 @@ class TestLoginRoutes(unittest.IsolatedAsyncioTestCase):
         TestManager(self.app)
 
         # Enregistre les routes avec page de login fictive
-        login_routes.register_login_routes(self.app, login_page="login.html")
+        login_routes.register_login_routes(self.app)
 
     @patch("routes.login_routes.render", new_callable=AsyncMock)
     async def test_login_get(self, mock_render):

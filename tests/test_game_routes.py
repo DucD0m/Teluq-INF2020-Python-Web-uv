@@ -14,7 +14,7 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
         TestManager(self.app)
 
         # Register routes
-        game_routes.register_game_routes(self.app, login_page="login.html")
+        game_routes.register_game_routes(self.app)
 
     @patch("routes.game_routes.render")
     async def test_index_with_cookie(self, mock_render):
