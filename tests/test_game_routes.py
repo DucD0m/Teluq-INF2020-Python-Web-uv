@@ -40,7 +40,7 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
     async def test_leaderboard_get(self):
         leaderboard_data = [{"username": "Alice", "points": 300}]
 
-        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderboard_file", return_value=None), \
              patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
@@ -63,7 +63,7 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
         leaderboard_data = [{"username": "Alice", "points": 3}]
         data = {"result_value": "🎉 You WIN!"}
 
-        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderboard_file", return_value=None), \
              patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
@@ -85,7 +85,7 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
     async def test_leaderboard_post_without_result(self):
         leaderboard_data = [{"username": "Alice", "points": 300}]
 
-        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderboard_file", return_value=None), \
              patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
@@ -110,7 +110,7 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
             {"username": "Bob", "points": 100},
         ]
 
-        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderboard_file", return_value=None), \
              patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 
@@ -157,7 +157,7 @@ class TestGameRoutes(unittest.IsolatedAsyncioTestCase):
         leaderboard_data = [{"username": "Alice", "points": 500}]
         data = {"result_value": "🎉 Victoire !"}
 
-        with patch.object(game_routes.LeaderboardHelper, "set_leaderbord_file", return_value=None), \
+        with patch.object(game_routes.LeaderboardHelper, "set_leaderboard_file", return_value=None), \
              patch.object(game_routes.LeaderboardHelper, "get_leaderboard_file", return_value=leaderboard_data), \
              patch("routes.game_routes.render") as mock_render:
 

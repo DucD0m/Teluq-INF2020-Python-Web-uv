@@ -29,7 +29,7 @@ def register_game_routes(app, login_page):
       #     for row in leaders
       # ]
 
-      lbh.set_leaderbord_file() # Mise à jour du tableau des meneurs.
+      lbh.set_leaderboard_file() # Mise à jour du tableau des meneurs.
       leaderboard_data = lbh.get_leaderboard_file()
 
       if type(leaderboard_data) is str:

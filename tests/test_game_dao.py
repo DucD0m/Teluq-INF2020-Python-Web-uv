@@ -50,7 +50,7 @@ class TestGameDAO(unittest.TestCase):
         self.dao.insert_game(1, 2, 0)
         self.dao.insert_game(1, 3, 3)
 
-        self.lbh.set_leaderbord_file(self.dao)
+        self.lbh.set_leaderboard_file(self.dao)
         leaderboard = self.lbh.get_leaderboard_file()
         self.assertEqual(leaderboard[0]["username"], "Alice")
         self.assertEqual(leaderboard[0]["points"], 150)

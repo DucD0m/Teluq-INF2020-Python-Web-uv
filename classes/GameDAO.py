@@ -55,8 +55,6 @@ class GameDAO:
         La colonne result indique win, draw ou loss.
         """
         with sqlite3.connect(self.db_path) as conn:
-            # Permet l'accès aux colonnes par leur nom.
-            conn.row_factory = sqlite3.Row
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT
