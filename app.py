@@ -7,6 +7,7 @@ from routes.websocket_routes import register_websocket_routes
 app = Sanic("TicTacToe")
 app.static('/', './') #Pour les paths src="" dans le html.
 
+## Localisation des certificats SSL.
 ssl = {
 "cert": "../cert/fullchain.pem",
 "key": "../cert/privkey.pem",
@@ -20,7 +21,8 @@ register_websocket_routes(app, game)
 
 
 if __name__ == '__main__':
-    #app.run(host="0.0.0.0", port=8000) #http
+    app.run(host="0.0.0.0", port=8000) #http
 
-    # Besoin d'un certificat ssl et de modifier game.js wss et https.
-    app.run(host="10.0.1.13", port=8443, ssl=ssl) #https
+    ## HTTPS -> Besoin d'un certificat ssl et de modifier game.js (wss et https au lieu de ws et http).
+    ## Il est souhaitable de mettre secure = True dans login_routes.py
+    # app.run(host="0.0.0.0", port=8443, ssl=ssl) #https
