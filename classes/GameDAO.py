@@ -1,21 +1,44 @@
-"""Ce fichier contient une classe pour l'accès à la base de données."""
+"""
+Accès aux données pour l'application Tic-Tac-Toe.
+
+Ce module définit la classe GameDAO, responsable de la gestion
+des interactions avec la base de données SQLite, incluant la
+création du schéma, l'insertion des parties et la récupération
+des résultats des joueurs.
+"""
 import sqlite3
 
 
 class GameDAO:
-    """Classe pour accéder à la table games."""
+    """Objet d'accès aux données (DAO) pour les parties et utilisateurs.
+
+    Cette classe encapsule toutes les opérations liées à la base
+    de données SQLite : création des tables, insertion des parties
+    et récupération des résultats pour le calcul du classement.
+    """
 
     def __init__(self, db_path):
-        """Assure que les tables existent avant l'exécution des méthodes.
+        """Initialise l'accès à la base de données.
+
+        Vérifie que le schéma requis (tables `games` et `users`)
+        existe et le crée si nécessaire.
 
         Args:
-            db_path (str): Emplacement et nom du fichier sqlite3.
+            db_path (str): Chemin vers le fichier de base de données SQLite.
         """
         self.db_path = db_path
         self._ensure_schema()
 
     def _ensure_schema(self):
-        """Création des tables games et users si absentes."""
+        """Crée les tables requises si elles n'existent pas.
+
+        Tables créées :
+        - games : stocke les parties jouées
+        - users : stocke les utilisateurs enregistrés
+
+        Cette méthode est appelée automatiquement lors de
+        l'initialisation de l'objet GameDAO.
+        """
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
             cursor.execute("""
@@ -36,10 +59,18 @@ class GameDAO:
                 )
             """)
 
-    def insert_game(self, player_x: int, player_o: int, winner: int):
-        """Insère une partie dans la base de données.
+    def insert_game(self, player_x, player_o, winner):
+        """Insère une nouvelle partie dans la base de données.
 
-        0 indique une partie nulle.
+        Une valeur de `winner` égale à 0 indique une partie nulle.
+
+        Args:
+            player_x (int): Identifiant de l'utilisateur jouant avec X.
+            player_o (int): Identifiant de l'utilisateur jouant avec O.
+            winner (int): Identifiant du gagnant ou 0 en cas de match nul.
+
+        Returns:
+            int: Identifiant (ID) de la partie nouvellement insérée.
         """
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
@@ -50,9 +81,20 @@ class GameDAO:
             return cursor.lastrowid
 
     def get_game_results(self):
-        """Retourne la liste des parties par utilisateurs.
+        """Retourne les résultats des parties par joueur.
 
-        La colonne result indique win, draw ou loss.
+        Chaque partie génère deux entrées :
+        - une pour le joueur X
+        - une pour le joueur O
+
+        Le champ `result` contient :
+        - "win"  : victoire du joueur
+        - "draw" : partie nulle
+        - "loss" : défaite du joueur
+
+        Returns:
+            list[tuple[str, str]]: Liste de tuples (username, result),
+            triée par nom d'utilisateur.
         """
         with sqlite3.connect(self.db_path) as conn:
             cursor = conn.cursor()
