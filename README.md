@@ -6,4 +6,4 @@
 Notes:
 - Les tests unittest ont été entièrement générés par ChatGPT et visent uniquement à explorer le concept. Ils ne prétendent pas être complets ni vérifiés autrement que de ne pas générer d'erreurs.
 
-- Le fichier GameDAO.py démontre un exemple de docstring selon la norme PEP257 et de code python selon PEP8.
+- Le fichier classes/GameDAO.py démontre un exemple de docstring selon la norme PEP257 et de code python selon PEP8.
