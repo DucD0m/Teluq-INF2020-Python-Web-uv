@@ -77,7 +77,7 @@ class LeaderboardHelper:
         new_leaderboard[player] = current_score + points
         return new_leaderboard
 
-    def set_leaderboard_file(self, dao = GameDAO("tictactoe.db")):
+    def set_leaderboard_file(self, dao=GameDAO("tictactoe.db")):
         """Calcule et sauvegarde le leaderboard dans un fichier JSON.
 
         Cette méthode :
