@@ -6,4 +6,4 @@
 Notes:
 - Les tests unittest ont été entièrement générés par ChatGPT et visent uniquement à explorer le concept. Ils ne prétendent pas être complets ni vérifiés autrement que de ne pas générer d'erreurs.
 
-- Sauf les fichier unittest, les fichiers python respectent les normes PEP8 et PEP257 pour le style et les docstrings.
+- Sauf les fichier unittest, les fichiers python respectent les normes PEP8 et PEP257 pour le style et les docstrings. La vérification du style est accomplie avec l'outil Flake8 ainsi que celui trouvé à https://www.codewof.co.nz/style/python3/
