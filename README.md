@@ -10,4 +10,6 @@ Notes:
 
 - Les fichiers html ont été validés en utilisant https://validator.w3.org/
 
-- Les fichiers javascript ont été validés en utilisant eslint (environnement browser) à la page https://validatejavascript.com/ 
+- Les fichiers css ont été validés en utilisant https://jigsaw.w3.org/css-validator/
+
+- Les fichiers javascript ont été validés en utilisant eslint (environnement browser) à la page https://validatejavascript.com/
