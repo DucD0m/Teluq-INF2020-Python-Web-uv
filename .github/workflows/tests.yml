@@ -1,4 +1,4 @@
-name: Python Tests (unittest) and Coverage
+name: Python Tests (unittest), Lint (flake8) and Coverage
 
 permissions:
   contents: write
@@ -37,6 +37,7 @@ jobs:
 
       - name: Run unittests and generate coverage
         run: |
+          uv run flake8 app.py classes routes
           uv run coverage run --rcfile=.coveragerc -m unittest discover -s tests
           uv run coverage report
           uv run coverage-badge -o coverage.svg -f

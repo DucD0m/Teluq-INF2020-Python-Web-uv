@@ -22,7 +22,7 @@ class LeaderboardHelper:
     - sauvegarde et charge le leaderboard depuis un fichier JSON.
     """
 
-    def __init__(self, file_path = "leaderboard.json"):
+    def __init__(self, file_path="leaderboard.json"):
         """Initialise le helper du leaderboard.
 
         Args:
@@ -77,7 +77,7 @@ class LeaderboardHelper:
         new_leaderboard[player] = current_score + points
         return new_leaderboard
 
-    def set_leaderboard_file(self, dao = GameDAO("tictactoe.db")):
+    def set_leaderboard_file(self, dao=GameDAO("tictactoe.db")):
         """Calcule et sauvegarde le leaderboard dans un fichier JSON.
 
         Cette méthode :
@@ -102,7 +102,7 @@ class LeaderboardHelper:
 
         sorted_leaderboard = sorted(
             leaderboard.items(),
-            key = lambda item: item[1],
+            key=lambda item: item[1],
             reverse=True
         )
 
@@ -129,9 +129,11 @@ class LeaderboardHelper:
             que le classement est indisponible.
         """
         message = "Le tableau des meneurs n'est pas disponible en ce moment."
+
         try:
             with open(self.file_path, 'r') as f:
                 data = json.load(f)
                 return data
-        except:
+
+        except (FileNotFoundError, PermissionError, json.JSONDecodeError):
             return message
