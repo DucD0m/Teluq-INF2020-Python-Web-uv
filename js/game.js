@@ -61,7 +61,7 @@ socket.addEventListener("message", (event) => {
 
     // Réception du message serveur en cas de déconnection.
     if (msg.startsWith("DISC|")) {
-        disconnect = msg.split("|")[1];
+        let disconnect = msg.split("|")[1];
         alert(disconnect);
         window.location.href = "http://" + window.location.host + "/";
         return;
