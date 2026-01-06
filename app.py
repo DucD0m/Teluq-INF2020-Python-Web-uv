@@ -40,7 +40,7 @@ register_websocket_routes(app, game)
 
 if __name__ == '__main__':
     # Démarrage du serveur HTTP
-    app.run(host="0.0.0.0", port=8000)
+    app.run(host="127.0.0.1", port=8000)
 
     # Pour HTTPS :
     # Nécessite un certificat SSL et modification de game.js (wss et https)

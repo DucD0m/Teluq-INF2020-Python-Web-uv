@@ -60,6 +60,14 @@
             <a href="/login" class="link mt-sm yellow">Vous avez un compte? Connectez-vous!</a>
           {% endif %}
 
+          {% if page == "login" %}
+            <div id="cc-container" class="mt-med">
+          {% else %}
+            <div id="cc-container" class="mt-sm">
+          {% endif %}
+                {% include 'components/creative_commons.html' %}
+            </div>
+
     </body>
 
 </html>

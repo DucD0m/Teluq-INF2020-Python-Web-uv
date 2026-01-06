@@ -59,10 +59,11 @@
 
         <a href="/" class="link mt-0 yellow">Commencez une nouvelle partie!</a>
 
-        <a href="/logout" id="logout-icon">
-          <img src="img/logout.svg" alt="Logout" width="30" height="30">
-          <span class="tooltip-text green">Quitter</span>
-        </a>
+        <div id="cc-container">
+          {% include 'components/creative_commons.html' %}
+        </div>
+
+        {% include 'components/logout.html' %}
 
     </body>
 </html>

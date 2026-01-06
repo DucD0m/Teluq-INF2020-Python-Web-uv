@@ -38,10 +38,11 @@
         <div id="user" class="yellow info">{{username}} <span id="user-msg">Connexion en cours...</span></div>
         <div id="turn" class="blue info"></div>
 
-        <a href="/logout" id="logout-icon">
-          <img src="img/logout.svg" alt="Logout" width="30" height="30">
-          <span class="tooltip-text green">Quitter</span>
-        </a>
+        <div id="cc-container">
+          {% include 'components/creative_commons.html' %}
+        </div>
+
+        {% include 'components/logout.html' %}
 
         <form id="result_form" action="/leaderboard" method="post" hidden>
           <input id="result_value" type="text" name="result_value">

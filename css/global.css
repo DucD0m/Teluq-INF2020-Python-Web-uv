@@ -5,6 +5,10 @@ font-weight: normal;
 font-style: normal;
 }
 
+html {
+  scrollbar-width: none;
+}
+
 body {
     /* By Wanwa - Own work, CC BY-SA 3.0, https://commons.wikimedia.org/w/index.php?curid=15078433*/
     background-image: url("/img/background.jpg");
@@ -63,6 +67,10 @@ h1 {
   margin-top: 25px;
 }
 
+.mt-5 {
+  margin-top: 5px;
+}
+
 .mt-0 {
   margin-top: 0px;
 }
@@ -89,4 +97,8 @@ h1 {
 
 #logout-icon:hover .tooltip-text {
   visibility: visible;
+}
+
+#cc-container {
+  text-align: left;
 }
