@@ -26,13 +26,21 @@ class UserDAO:
         self.db_path = db_path
         self._ensure_schema()
 
+    def _connect(self):
+        try:
+            return sqlite3.connect(self.db_path)
+        except sqlite3.Error as e:
+            print(f"Erreur de connexion sqlite3 : {e}")
+            print(f"Emplacement de la base de données : {self.db_path}")
+            raise
+
     def _ensure_schema(self):
         """Crée la table `users` si elle n'existe pas.
 
         Cette méthode est appelée automatiquement lors de
         l'initialisation de l'objet UserDAO.
         """
-        with sqlite3.connect(self.db_path) as conn:
+        with self._connect() as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS users (
@@ -56,7 +64,7 @@ class UserDAO:
             int: Identifiant (ID) de l'utilisateur nouvellement créé
             en cas de succès, ou 0 si le nom d'utilisateur existe déjà.
         """
-        with sqlite3.connect(self.db_path) as conn:
+        with self._connect() as conn:
             cursor = conn.cursor()
             try:
                 cursor.execute("""
@@ -82,7 +90,7 @@ class UserDAO:
             sqlite3.Row | None: Ligne contenant `id` et `username`
             si l'utilisateur est trouvé, sinon None.
         """
-        with sqlite3.connect(self.db_path) as conn:
+        with self._connect() as conn:
             # Permet l'accès aux colonnes comme un dictionnaire.
             conn.row_factory = sqlite3.Row
             cursor = conn.cursor()

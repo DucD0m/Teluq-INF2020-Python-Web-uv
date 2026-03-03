@@ -29,6 +29,14 @@ class GameDAO:
         self.db_path = db_path
         self._ensure_schema()
 
+    def _connect(self):
+        try:
+            return sqlite3.connect(self.db_path)
+        except sqlite3.Error as e:
+            print(f"Erreur de connexion sqlite3 : {e}")
+            print(f"Emplacement de la base de données : {self.db_path}")
+            raise
+
     def _ensure_schema(self):
         """Crée les tables requises si elles n'existent pas.
 
@@ -39,7 +47,7 @@ class GameDAO:
         Cette méthode est appelée automatiquement lors de
         l'initialisation de l'objet GameDAO.
         """
-        with sqlite3.connect(self.db_path) as conn:
+        with self._connect() as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 CREATE TABLE IF NOT EXISTS games (
@@ -72,7 +80,7 @@ class GameDAO:
         Returns:
             int: Identifiant (ID) de la partie nouvellement insérée.
         """
-        with sqlite3.connect(self.db_path) as conn:
+        with self._connect() as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 INSERT INTO games (playerX, playerO, winner)
@@ -96,7 +104,7 @@ class GameDAO:
             list[tuple[str, str]]: Liste de tuples (username, result),
             triée par nom d'utilisateur.
         """
-        with sqlite3.connect(self.db_path) as conn:
+        with self._connect() as conn:
             cursor = conn.cursor()
             cursor.execute("""
                 SELECT
