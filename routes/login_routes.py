@@ -78,12 +78,12 @@ def register_login_routes(app):
                 return response
 
             else:
-                message = "Le nom d'utilisateur et/ou "
-                "le mot de passe sont erronés."
+                message = ("Le nom d'utilisateur et/ou "
+                "le mot de passe sont erronés.")
 
         else:
-            message = "Svp vérifiez votre nom d'utilisateur "
-            "et votre mot de passe et réessayer."
+            message = ("Svp vérifiez votre nom d'utilisateur "
+            "et votre mot de passe et réessayer.")
 
         return await render(
             login_page, context={"message": message, "page": "login"}
@@ -147,12 +147,12 @@ def register_login_routes(app):
             if uid > 0:
                 return redirect("/login")
             else:
-                message = "Ce nom d'utilisateur est déjà utilisé."
-                " Svp essayez de nouveau."
+                message = ("Ce nom d'utilisateur est déjà utilisé."
+                " Svp essayez de nouveau.")
 
         else:
-            message = "Le nom d'utilisateur et/ou le mot de passe "
-            "ne rencontrent pas les demandes. Svp essayez de nouveau."
+            message = ("Le nom d'utilisateur et/ou le mot de passe "
+            "ne rencontrent pas les demandes. Svp essayez de nouveau.")
 
         return await render(
             login_page, context={"message": message, "page": "register"}
