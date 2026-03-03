@@ -15,8 +15,6 @@ from sanic.response import redirect
 from sanic_ext import render
 from classes.UserDAO import UserDAO
 
-UNEXPECTED = "Une erreur inattendue s'est produite. Svp essayez de nouveau."
-
 
 def register_login_routes(app):
     """Enregistre les routes de login, logout et inscription.
@@ -60,33 +58,28 @@ def register_login_routes(app):
         password = request.form.get("password")
 
         if username and password:
-            try:
-                dao = UserDAO("tictactoe.db")
-                user = dao.get_user(username, password)
+            dao = UserDAO("tictactoe.db")
+            user = dao.get_user(username, password)
 
-                if user:
-                    response = redirect("/")
-                    response.add_cookie(
-                        "username",
-                        str(user["username"]),
-                        secure=False,
-                        httponly=True
-                    )
-                    response.add_cookie(
-                        "id",
-                        str(user["id"]),
-                        secure=False,
-                        httponly=True
-                    )
-                    return response
+            if user:
+                response = redirect("/")
+                response.add_cookie(
+                    "username",
+                    str(user["username"]),
+                    secure=False,
+                    httponly=True
+                )
+                response.add_cookie(
+                    "id",
+                    str(user["id"]),
+                    secure=False,
+                    httponly=True
+                )
+                return response
 
-                else:
-                    message = "Le nom d'utilisateur et/ou "
-                    "le mot de passe sont erronés."
-
-            except (dao.OperationalError, dao.DatabaseError):
-                # Erreurs liées à SQLite
-                message = UNEXPECTED
+            else:
+                message = "Le nom d'utilisateur et/ou "
+                "le mot de passe sont erronés."
 
         else:
             message = "Svp vérifiez votre nom d'utilisateur "
@@ -149,18 +142,13 @@ def register_login_routes(app):
         message = None
 
         if len(username) > 2 and len(password) > 2 and password == password2:
-            try:
-                dao = UserDAO("tictactoe.db")
-                uid = dao.insert_user(username, password)
-                if uid > 0:
-                    return redirect("/login")
-                else:
-                    message = "Ce nom d'utilisateur est déjà utilisé."
-                    " Svp essayez de nouveau."
-
-            except (dao.OperationalError, dao.DatabaseError):
-                # Erreurs liées à SQLite
-                message = UNEXPECTED
+            dao = UserDAO("tictactoe.db")
+            uid = dao.insert_user(username, password)
+            if uid > 0:
+                return redirect("/login")
+            else:
+                message = "Ce nom d'utilisateur est déjà utilisé."
+                " Svp essayez de nouveau."
 
         else:
             message = "Le nom d'utilisateur et/ou le mot de passe "
