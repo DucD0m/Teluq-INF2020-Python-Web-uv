@@ -27,6 +27,10 @@ class UserDAO:
         self._ensure_schema()
 
     def _connect(self):
+        """Gére la connexion à la base de données.
+
+        Cette méthode effectue la gestion des erreurs.
+        """
         try:
             return sqlite3.connect(self.db_path)
         except sqlite3.Error as e:
