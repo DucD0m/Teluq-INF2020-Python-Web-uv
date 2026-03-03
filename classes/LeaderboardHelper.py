@@ -117,8 +117,13 @@ class LeaderboardHelper:
             leader_asdict = leader._asdict()
             data.append(leader_asdict)
 
-        with open(self.file_path, "w") as f:
-            json.dump(data, f, indent=4)
+        try:
+            with open(self.file_path, "w") as f:
+                json.dump(data, f, indent=4)
+
+        except (FileNotFoundError, PermissionError, OSError) as e:
+            print(f"Erreur d'écriture du fichier des meneurs : {e}")
+            print(f"Emplacement du fichier : {self.file_path}")
 
     def get_leaderboard_file(self):
         """Charge le leaderboard depuis le fichier JSON.
@@ -135,5 +140,10 @@ class LeaderboardHelper:
                 data = json.load(f)
                 return data
 
-        except (FileNotFoundError, PermissionError, json.JSONDecodeError):
+        except (
+            FileNotFoundError,
+            PermissionError,
+            OSError,
+            json.JSONDecodeError,
+        ):
             return message
