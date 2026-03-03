@@ -57,7 +57,7 @@ class WebsocketHelper:
                     "DISC|La connexion avec l'autre joueur a été perdue. "
                     + "La partie sera réinitialisée."
                 )
-            except (Exception, AttributeError):
+            except Exception:
                 self.game.connected.pop(ws, None)
 
             self.game.reset_game()
@@ -78,7 +78,7 @@ class WebsocketHelper:
         for ws in list(self.game.connected.keys()):
             try:
                 await ws.send(message)
-            except (Exception, AttributeError):
+            except Exception:
                 self.game.connected.pop(ws, None)
 
     async def close_all_connections(self):
@@ -92,7 +92,7 @@ class WebsocketHelper:
         for ws in list(self.game.connected.keys()):
             try:
                 await ws.close()
-            except (Exception, AttributeError):
+            except Exception:
                 pass
             finally:
                 self.game.connected.pop(ws, None)
