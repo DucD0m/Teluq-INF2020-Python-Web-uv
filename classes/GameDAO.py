@@ -35,7 +35,7 @@ class GameDAO:
         Cette méthode effectue la gestion des erreurs.
         """
         try:
-            return sqlite3.connect(self.db_path)
+            return sqlite3.connect(self.db_path, timeout=5)
         except sqlite3.Error as e:
             print(f"Erreur de connexion sqlite3 : {e}")
             print(f"Emplacement de la base de données : {self.db_path}")
